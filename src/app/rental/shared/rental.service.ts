@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
+import { Rental } from './rental.model';
 
 @Injectable()
 export class RentalService {
 
-    private rentals: any[] = 
+    private rentals: Rental[] = 
     [{
-        id:1,
+        id:"1",
         title: "Central Apartment",
         city: "New York",
         street:"Time Square",
@@ -19,7 +20,7 @@ export class RentalService {
         createdAt: "27/08/2019"
       },
       {
-        id:2,
+        id:"2",
         title: "Cosy House",
         city: "Paris",
         street:"Neuilly-Sur-Seine",
@@ -32,7 +33,7 @@ export class RentalService {
         createdAt: "27/08/2019"
       },
       {
-        id:3,
+        id:"3",
         title: "Central Apartment 2",
         city: "San Francisco",
         street:"Main Street",
@@ -45,7 +46,7 @@ export class RentalService {
         createdAt: "27/08/2019"
       },
       {
-        id:4,
+        id:"4",
         title: "Cosy Room for 2",
         city: "Japan",
         street:"Shibuya",
@@ -58,22 +59,26 @@ export class RentalService {
         createdAt: "27/08/2019"
       },]
 
-public getRentals(): any {
-    const rentalObservable = new Observable((observer) => {
+public getRentalsById(rentalId: string): Observable<Rental> {
+
+    return new Observable<Rental>((observer) => {
+        setTimeout(() => {
+            const foundRental = this.rentals.find((rental) => {
+                return rental.id == rentalId;
+            });
+
+            observer.next(foundRental);
+        }, 500);
+    });
+}
+
+public getRentals(): Observable<Rental[]> {
+    return new Observable<Rental[]>((observer) => {
 
         setTimeout(() => {
             observer.next(this.rentals)
         }, 1000);
-
-        setTimeout(() => {
-            observer.error("I'am Error")
-        }, 2000);
-
-        setTimeout(() => {
-            observer.complete()
-        }, 3000);
     })
-    return rentalObservable;
 }
 
 }
