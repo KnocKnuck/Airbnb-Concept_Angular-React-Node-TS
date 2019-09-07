@@ -38,7 +38,7 @@ class FakeDb {
     }
 
     async cleanDb() {
-       await Rental.remove({});
+       await Rental.deleteMany({});
     }
 
     pushRentalstoDb() {
