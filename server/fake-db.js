@@ -26,13 +26,13 @@ class FakeDb {
             },
             {
             title: "Old house in nature",
-            city: "Spisska Nova Ves",
-            street: "Banicka 1",
+            city: "Paris",
+            street: "France",
             category: "house",
             image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
             bedrooms: 5,
             shared: true,
-            description: "Very nice apartment in center of the city.",
+            description: "Au pieds de la Tour Eiffel",
             dailyRate: 23
             }]
     }
