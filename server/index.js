@@ -1,18 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const config = require('./config/dev');
 const Rental = require('./models/rental')
-const FakeDb = require('./fake-db')
-const rentalRoute = require('./routes/rentals'); 
+const FakeDb = require('./fake-db');
+
+const rentalRoutes = require('./routes/rentals'),
+      userRoutes = require('./routes/users'); 
 
 mongoose.connect(config.DB_URI).then(() => {
     const fakeDb = new FakeDb();
     fakeDb.seedDb();
-} );
+});
 
 const app = express();
 
-app.use('/api/v1/rentals', rentalRoute);
+app.use(bodyParser.json())
+
+app.use('/api/v1/rentals', rentalRoutes);
+app.use('/api/v1/users', userRoutes);
 
 app.get('/rentals', function(req, res) {
     res.json({'succes': true});
